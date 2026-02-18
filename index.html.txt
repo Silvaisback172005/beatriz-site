@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emanuel ❤️ Beatriz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+background:#000;
+color:white;
+font-family:'Montserrat',sans-serif;
+overflow:hidden;
+}
+
+/* TELA INICIAL */
+#intro{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:black;
+z-index:10;
+}
+
+#intro h1{
+font-family:'Playfair Display',serif;
+font-size:2.5rem;
+letter-spacing:3px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%,100%{opacity:0.6;}
+50%{opacity:1;}
+}
+
+button{
+margin-top:30px;
+padding:14px 35px;
+border:none;
+border-radius:50px;
+background:linear-gradient(45deg,#ffd700,#b8860b);
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.4s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* CONTEÚDO PRINCIPAL */
+#main{
+display:none;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+background:linear-gradient(135deg,#000,#1a0000);
+}
+
+.nome{
+font-family:'Playfair Display',serif;
+font-size:3rem;
+background:linear-gradient(45deg,#ffd700,#fff5b7,#ffd700);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 4s infinite linear;
+}
+
+@keyframes shine{
+0%{background-position:-200px;}
+100%{background-position:200px;}
+}
+
+.photo{
+margin-top:30px;
+width:220px;
+height:220px;
+border-radius:50%;
+overflow:hidden;
+border:4px solid gold;
+box-shadow:0 0 30px gold;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+#text{
+margin-top:30px;
+max-width:600px;
+line-height:1.7;
+min-height:100px;
+}
+
+#contador{
+margin-top:20px;
+opacity:0.8;
+}
+
+.final-btn{
+margin-top:35px;
+background:linear-gradient(45deg,#ff4e8a,#ff1f6b);
+color:white;
+}
+
+.heart{
+position:absolute;
+color:rgba(255,0,0,0.6);
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+<h1>Uma mensagem para você, Beatriz ❤️</h1>
+<button onclick="start()">Abrir</button>
+</div>
+
+<div id="main">
+<div class="nome">Emanuel & Beatriz</div>
+
+<div class="photo">
+<img src="foto.jpg">
+</div>
+
+<div id="text"></div>
+<div id="contador"></div>
+
+<button class="final-btn" onclick="pedido()">Para Sempre 💍</button>
+</div>
+
+<audio id="musica" loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function start(){
+document.getElementById("intro").style.display="none";
+document.getElementById("main").style.display="flex";
+document.getElementById("musica").play();
+escrever();
+}
+
+const mensagem="Desde o dia 24 de agosto de 2023, minha vida mudou completamente. Você se tornou minha paz, minha felicidade e meu propósito. Eu não quero apenas viver momentos com você. Eu quero viver uma vida inteira ao seu lado. Eu te amo infinitamente. — Emanuel ❤️";
+
+let i=0;
+function escrever(){
+if(i<mensagem.length){
+document.getElementById("text").innerHTML+=mensagem.charAt(i);
+i++;
+setTimeout(escrever,30);
+}
+}
+
+// Contador real
+const inicio=new Date("August 24, 2023 00:00:00").getTime();
+setInterval(()=>{
+const agora=new Date().getTime();
+const diff=agora-inicio;
+const dias=Math.floor(diff/(1000*60*60*24));
+const anos=Math.floor(dias/365);
+const meses=Math.floor((dias%365)/30);
+
+document.getElementById("contador").innerHTML=
+"Juntos há "+anos+" anos e "+meses+" meses ❤️";
+},1000);
+
+// Pedido final
+function pedido(){
+alert("Beatriz, você aceita viver o resto da sua vida comigo? 💍❤️");
+}
+
+// Corações
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+heart.style.animationDuration=(Math.random()*5+5)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove()},6000);
+},700);
+</script>
+
+</body>
+</html>
